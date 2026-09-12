@@ -124,20 +124,42 @@ en introduisant la variable $\delta_z$ définissant le sens de propagation du mo
 
 \paragraph{modes TE}
 \begin{align}
-E_r &= \frac{i \mu \omega}{k_c ^ 2} \frac{m}{r} J_n(r k_c)\sin(n \theta) \\
+E_r &= \frac{i \mu \omega}{k_c ^ 2} \frac{n}{r} J_n(r k_c)\sin(n \theta) \\
 E_\theta &= \frac{i \mu \omega}{k_c ^ 2} k_c J'_n(r k_c)\cos(n \theta) \\
 H_r &= -\frac{i \beta \delta_z}{k_c ^ 2} k_c J'_n(r k_c)\cos(n \theta) \\
-H_\theta &= \frac{i \beta \delta_z}{k_c ^ 2} \frac{m}{r} J_n(r k_c)\sin(n \theta)
+H_\theta &= \frac{i \beta \delta_z}{k_c ^ 2} \frac{n}{r} J_n(r k_c)\sin(n \theta)
+\end{align}
+
+les champs dans le plan transverse s'écrivent alors:
+
+\begin{align}
+\vec{E_t} = \frac{i \mu \omega}{k_c ^ 2} \begin{pmatrix} \frac{n}{r} J_n(r k_c)\sin(n \theta) \\ k_c J'_n(r k_c)\cos(n \theta) \end{pmatrix} e^{-j\delta_z\beta z} \\
+\vec{H_t} = \frac{i \beta \delta_z}{k_c ^ 2} \begin{pmatrix} -k_c J'_n(r k_c)\cos(n \theta) \\ \frac{n}{r} J_n(r k_c)\sin(n \theta) \end{pmatrix} e^{-j\delta_z\beta z}
 \end{align}
 
 \paragraph{modes TM}
 \begin{align}
 E_r &= -\frac{i \beta \delta_z}{k_c ^ 2} k_c J'_n(r k_c)\cos(n \theta) \\
-E_\theta &= \frac{i \beta \delta_z}{k_c ^ 2} \frac{m}{r} J_n(r k_c)\sin(n \theta) \\
-H_r &= -\frac{i \epsilon \omega}{k_c ^ 2} \frac{m}{r} J_n(r k_c)\sin(n \theta) \\
+E_\theta &= \frac{i \beta \delta_z}{k_c ^ 2} \frac{n}{r} J_n(r k_c)\sin(n \theta) \\
+H_r &= -\frac{i \epsilon \omega}{k_c ^ 2} \frac{n}{r} J_n(r k_c)\sin(n \theta) \\
 H_\theta &= -\frac{i \epsilon \omega}{k_c ^ 2} k_c J'_n(r k_c)\cos(n \theta)
 \end{align}
 
+Soit dans le plan transvere:
+
+\begin{align}
+\vec{E_t} = \frac{i \beta \delta_z}{k_c ^ 2} \begin{pmatrix} -k_c J'_n(r k_c)\cos(n \theta) \\ \frac{n}{r} J_n(r k_c)\sin(n \theta) \end{pmatrix} e^{-j\delta_z\beta z} \\
+\vec{H_t} = \frac{i \epsilon \omega}{k_c ^ 2} \begin{pmatrix} -\frac{n}{r} J_n(r k_c)\sin(n \theta) \\ -k_c J'_n(r k_c)\cos(n \theta) \end{pmatrix} e^{-j\delta_z\beta z}
+\end{align}
+
+Dans la suite de ce rapport, on notera les champs sous la forme compacte suivante:
+
+\begin{align}
+\vec{E_t} = E_0 \vec{e}(r, \theta) e^{-j\delta_z\beta z} \\
+\vec{H_t} = Y E_0 \vec{h}(r, \theta) e^{-j\delta_z\beta z}
+\end{align}
+
+avec Y l'admittance du mode: $\delta_z \frac{\beta}{\mu \omega}$ pour un mode TE, $\delta_z \frac{\epsilon \omega}{\beta}$ pour un mode TM
 
 % ==========================================================
 \chapter{Calcul des champs à l'interface entre deux guides d'onde circulaires de rayons différents}
