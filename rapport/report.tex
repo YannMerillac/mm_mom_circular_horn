@@ -178,16 +178,17 @@ La méthode employée pour résoudre cette discontinuité est la \textbf{Techniq
 
 Dans le \textbf{Guide 1} ($z \le 0$), le champ transversal total est la somme du champ incident et des modes réfléchis :
 \begin{align}
-\vec{E}_t^{(1)}(r,\theta,z) &= \sum_{m=1}^{M} \left( a_m e^{-j\beta_m^{(1)} z} + b_m e^{+j\beta_m^{(1)} z} \right) \vec{e}_m^{(1)}(r,\theta) \\
-\vec{H}_t^{(1)}(r,\theta,z) &= \sum_{m=1}^{M} Y_m^{(1)} \left( a_m e^{-j\beta_m^{(1)} z} - b_m e^{+j\beta_m^{(1)} z} \right) \vec{h}_m^{(1)}(r,\theta)
+\vec{E}_t^{(1)}(r,\theta,z) &= \sum_{i=1}^{M} \left( {a_i}^{+} e^{-j\beta_i^{(1)} z} + {a_i}^{-} e^{+j\beta_i^{(1)} z} \right) \vec{e}_i^{(1)}(r,\theta) \\
+\vec{H}_t^{(1)}(r,\theta,z) &= \sum_{i=1}^{M} Y_i^{(1)} \left( {a_i}^{+} e^{-j\beta_i^{(1)} z} - {a_i}^{-} e^{+j\beta_i^{(1)} z} \right) \vec{h}_i^{(1)}(r,\theta)
 \end{align}
 
-Dans le \textbf{Guide 2} ($z \ge 0$), le champ transversal s'exprime sur la base des modes transmis :
+De même dans le \textbf{Guide 2} ($z \ge 0$):
 \begin{align}
-\vec{E}_t^{(2)}(r,\theta,z) &= \sum_{n=1}^{N} c_n e^{-j\beta_n^{(2)} z} \vec{e}_n^{(2)}(r,\theta) \\
-\vec{H}_t^{(2)}(r,\theta,z) &= \sum_{n=1}^{N} Y_n^{(2)} c_n e^{-j\beta_n^{(2)} z} \vec{h}_n^{(2)}(r,\theta)
+\vec{E}_t^{(2)}(r,\theta,z) &= \sum_{k=1}^{N} \left( {b_k}^{+} e^{-j\beta_k^{(2)} z} + {b_k}^{-} e^{+j\beta_k^{(2)} z} \right) \vec{e}_k^{(2)}(r,\theta) \\
+\vec{H}_t^{(2)}(r,\theta,z) &= \sum_{k=1}^{N} Y_k^{(2)} \left( {b_k}^{+} e^{-j\beta_k^{(2)} z} - {b_k}^{-} e^{+j\beta_k^{(2)} z} \right) \vec{h}_k^{(2)}(r,\theta)
 \end{align}
-où $a_m, b_m, c_n$ sont respectivement les amplitudes modales incidentes, réfléchies et transmises, et $Y^{(1,2)}$ les admittances modales.
+
+où ${a_i}^{+}, {a_i}^{-}$ sont respectivement les amplitudes modales incidentes et réfléchies dans le guide 1, ${b_k}^{+}, {b_k}^{-}$ les amplitudes des modes réfléchis et incidents dans le guide 2, et $Y^{(1,2)}$ les admittances modales.
 
 \section{Conditions de continuité à l'interface ($z = 0$)}
 Au niveau de la discontinuité $z = 0$, les équations aux limites s'écrivent :
