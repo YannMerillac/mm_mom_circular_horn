@@ -49,7 +49,7 @@ en considérant un courant nul: $\vec{j}=0$, les équations deviennent donc:
 \vec{\nabla} \times \vec{H} &= i \omega \varepsilon_0 \vec{E}
 \end{align}
 
-Considérons un guide d'onde cylindrique parfait de rayon $a$, rempli d'un milieu linéaire, homogène et isotrope caractérisé par sa permittivité $\varepsilon$ et sa perméabilité $\mu$. On adopte le système de coordonnées cylindriques $(r, \phi, z)$, avec l'axe $z$ orienté selon la direction de propagation.
+Considérons un guide d'onde cylindrique parfait de rayon $a$, rempli d'un milieu linéaire, homogène et isotrope caractérisé par sa permittivité $\varepsilon$ et sa perméabilité $\mu$. On adopte le système de coordonnées cylindriques $(r, \theta, z)$, avec l'axe $z$ orienté selon la direction de propagation.
 
 En combinant les termes $\vec{\nabla} \times \vec{E}$ et $\vec{\nabla} \times \vec{H}$  des deux dernieres équations, on obtient les équations de Helmholtz pour les composantes longitudinales $E_z$ et $H_z$ :
 \begin{equation}
@@ -59,19 +59,19 @@ où $k = \omega \sqrt{\varepsilon\mu}$ est le nombre d'onde dans le milieu.
 
 En supposant une propagation selon $+z$ sous la forme $e^{-j\beta z}$, l'opérateur laplacien en coordonnées cylindriques appliqué aux composantes longitudinales donne :
 \begin{equation}
-\frac{\partial^2 \psi}{\partial r^2} + \frac{1}{r}\frac{\partial \psi}{\partial r} + \frac{1}{r^2}\frac{\partial^2 \psi}{\partial \phi^2} + k_c^2 \psi = 0
+\frac{\partial^2 \psi}{\partial r^2} + \frac{1}{r}\frac{\partial \psi}{\partial r} + \frac{1}{r^2}\frac{\partial^2 \psi}{\partial \theta^2} + k_c^2 \psi = 0
 \label{eq:helmholtz_cyl}
 \end{equation}
 avec $\psi \in \{E_z, H_z\}$ et où $k_c^2 = k^2 - \beta^2$ définit la constante de propagation transversale (fréquence de coupure).
 
 \section{Séparation des variables et fonctions de Bessel}
-Par la méthode de séparation des variables, on pose $\psi(r, \phi) = R(r)\Phi(\phi)$. L'équation \eqref{eq:helmholtz_cyl} se décompose en deux équations différentielles ordinaires :
+Par la méthode de séparation des variables, on pose $\psi(r, \theta) = R(r)\Phi(\theta)$. L'équation \eqref{eq:helmholtz_cyl} se décompose en deux équations différentielles ordinaires :
 \begin{align}
-\frac{d^2\Phi}{d\phi^2} + n^2 \Phi &= 0 \quad (n \in \mathbb{N}) \\
+\frac{d^2\Phi}{d\theta^2} + n^2 \Phi &= 0 \quad (n \in \mathbb{N}) \\
 r^2 \frac{d^2R}{dr^2} + r \frac{dR}{dr} + \left( (k_c r)^2 - n^2 \right) R &= 0
 \end{align}
 
-La solution angulaire impose une périodicité $2\pi$, d'où $\Phi(\phi) = A \cos(n\phi) + B \sin(n\phi)$ avec $n$ entier.
+La solution angulaire impose une périodicité $2\pi$, d'où $\Phi(\theta) = A \cos(n\theta) + B \sin(n\theta)$ avec $n$ entier.
 L'équation radiale est l'équation différentielle de Bessel. Sa solution générale s'écrit :
 \begin{equation}
 R(r) = C J_n(k_c r) + D Y_n(k_c r)
@@ -80,16 +80,16 @@ où $J_n$ est la fonction de Bessel de première espèce d'ordre $n$, et $Y_n$ l
 
 Ainsi, les solutions longitudinales sont de la forme :
 \begin{equation}
-\psi(r,\phi,z) = C_n J_n(k_c r) \cos(n\phi) e^{-j\beta z}
+\psi(r,\theta,z) = C_n J_n(k_c r) \cos(n\theta) e^{-j\beta z}
 \end{equation}
 
 \section{Calcul des composantes transversales}
 À partir des équations de Maxwell, les composantes transversales se déduisent directement des composantes longitudinales $E_z$ et $H_z$ (en ré-injectant les solutions dans les équations de Maxwell $\vec{\nabla} \times \vec{E}$ et $\vec{\nabla} \times \vec{H}$:
 \begin{align}
-E_r &= \frac{-j}{k_c^2} \left( \beta \frac{\partial E_z}{\partial r} + \frac{\omega\mu}{r} \frac{\partial H_z}{\partial \phi} \right) \\
-E_\phi &= \frac{-j}{k_c^2} \left( \frac{\beta}{r} \frac{\partial E_z}{\partial \phi} - \omega\mu \frac{\partial H_z}{\partial r} \right) \\
-H_r &= \frac{-j}{k_c^2} \left( \beta \frac{\partial H_z}{\partial r} - \frac{\omega\varepsilon}{r} \frac{\partial E_z}{\partial \phi} \right) \\
-H_\phi &= \frac{-j}{k_c^2} \left( \frac{\beta}{r} \frac{\partial H_z}{\partial \phi} + \omega\varepsilon \frac{\partial E_z}{\partial r} \right)
+E_r &= \frac{-j}{k_c^2} \left( \beta \frac{\partial E_z}{\partial r} + \frac{\omega\mu}{r} \frac{\partial H_z}{\partial \theta} \right) \\
+E_\theta &= \frac{-j}{k_c^2} \left( \frac{\beta}{r} \frac{\partial E_z}{\partial \theta} - \omega\mu \frac{\partial H_z}{\partial r} \right) \\
+H_r &= \frac{-j}{k_c^2} \left( \beta \frac{\partial H_z}{\partial r} - \frac{\omega\varepsilon}{r} \frac{\partial E_z}{\partial \theta} \right) \\
+H_\theta &= \frac{-j}{k_c^2} \left( \frac{\beta}{r} \frac{\partial H_z}{\partial \theta} + \omega\varepsilon \frac{\partial E_z}{\partial r} \right)
 \end{align}
 
 \section{Conditions aux limites et modes $TM$ et $TE$}
@@ -97,7 +97,7 @@ H_\phi &= \frac{-j}{k_c^2} \left( \frac{\beta}{r} \frac{\partial H_z}{\partial \
 \subsection{Modes Transversaux Magnétiques ($TM_{np}$ : $H_z = 0$)}
 Pour les modes $TM$, le champ électrique longitudinal $E_z$ doit s'annuler sur la paroi métallique conductrice parfaite ($r = a$) :
 \begin{equation}
-E_z(a, \phi, z) = 0 \implies J_n(k_c a) = 0
+E_z(a, \theta, z) = 0 \implies J_n(k_c a) = 0
 \end{equation}
 Soit $x_{np}$ la $p$-ième racine de la fonction de Bessel $J_n(x)$. La constante de coupure vaut :
 \begin{equation}
@@ -105,7 +105,7 @@ k_{c,np}^{TM} = \frac{x_{np}}{a}
 \end{equation}
 
 \subsection{Modes Transversaux Électriques ($TE_{np}$ : $E_z = 0$)}
-Pour les modes $TE$, la condition $E_\phi(a, \phi, z) = 0$ impose :
+Pour les modes $TE$, la condition $E_\theta(a, \theta, z) = 0$ impose :
 \begin{equation}
 \left. \frac{\partial H_z}{\partial r} \right|_{r=a} = 0 \implies J'_n(k_c a) = 0
 \end{equation}
@@ -167,25 +167,25 @@ avec Y l'admittance du mode: $\delta_z \frac{\beta}{\mu \omega}$ pour un mode TE
 
 \section{Description géométrique du problème}
 On considère la jonction à l'origine $z = 0$ entre deux guides d'onde circulaires alignés sur le même axe :
-%\begin1
-%    \item \textbf{Guide 1} ($z < 0$) : rayon $a$.
-%    \item \textbf{Guide 2} ($z > 0$) : rayon $b$.
-%\end1
+\begin{itemize}
+    \item \textbf{Guide 1} ($z < 0$) : rayon $a$.
+    \item \textbf{Guide 2} ($z > 0$) : rayon $b$.
+\end{itemize}
 On suppose sans perte de généralité que $a < b$ (discontinuité par élargissement). À l'interface $z = 0$, $S_1$ désigne la section du guide 1 et $S_2$ celle du guide 2. La région $S_2 \setminus S_1$ correspond au masque métallique conductrice parfaite (discontinuité de rayon).
 
 \section{Décomposition modale des champs}
 La méthode employée pour résoudre cette discontinuité est la \textbf{Technique de Raccordement de Modes} (\textit{Mode Matching Technique}).
 
-Dans le **Guide 1** ($z \le 0$), le champ transversal total est la somme du champ incident et des modes réfléchis :
+Dans le \textbf{Guide 1} ($z \le 0$), le champ transversal total est la somme du champ incident et des modes réfléchis :
 \begin{align}
-\vec{E}_t^{(1)}(r,\phi,z) &= \sum_{m=1}^{M} \left( a_m e^{-j\beta_m^{(1)} z} + b_m e^{+j\beta_m^{(1)} z} \right) \vec{e}_m^{(1)}(r,\phi) \\
-\vec{H}_t^{(1)}(r,\phi,z) &= \sum_{m=1}^{M} Y_m^{(1)} \left( a_m e^{-j\beta_m^{(1)} z} - b_m e^{+j\beta_m^{(1)} z} \right) \vec{h}_m^{(1)}(r,\phi)
+\vec{E}_t^{(1)}(r,\theta,z) &= \sum_{m=1}^{M} \left( a_m e^{-j\beta_m^{(1)} z} + b_m e^{+j\beta_m^{(1)} z} \right) \vec{e}_m^{(1)}(r,\theta) \\
+\vec{H}_t^{(1)}(r,\theta,z) &= \sum_{m=1}^{M} Y_m^{(1)} \left( a_m e^{-j\beta_m^{(1)} z} - b_m e^{+j\beta_m^{(1)} z} \right) \vec{h}_m^{(1)}(r,\theta)
 \end{align}
 
-Dans le **Guide 2** ($z \ge 0$), le champ transversal s'exprime sur la base des modes transmis :
+Dans le \textbf{Guide 2} ($z \ge 0$), le champ transversal s'exprime sur la base des modes transmis :
 \begin{align}
-\vec{E}_t^{(2)}(r,\phi,z) &= \sum_{n=1}^{N} c_n e^{-j\beta_n^{(2)} z} \vec{e}_n^{(2)}(r,\phi) \\
-\vec{H}_t^{(2)}(r,\phi,z) &= \sum_{n=1}^{N} Y_n^{(2)} c_n e^{-j\beta_n^{(2)} z} \vec{h}_n^{(2)}(r,\phi)
+\vec{E}_t^{(2)}(r,\theta,z) &= \sum_{n=1}^{N} c_n e^{-j\beta_n^{(2)} z} \vec{e}_n^{(2)}(r,\theta) \\
+\vec{H}_t^{(2)}(r,\theta,z) &= \sum_{n=1}^{N} Y_n^{(2)} c_n e^{-j\beta_n^{(2)} z} \vec{h}_n^{(2)}(r,\theta)
 \end{align}
 où $a_m, b_m, c_n$ sont respectivement les amplitudes modales incidentes, réfléchies et transmises, et $Y^{(1,2)}$ les admittances modales.
 
@@ -194,15 +194,15 @@ Au niveau de la discontinuité $z = 0$, les équations aux limites s'écrivent :
 
 1. Continuité du champ électrique transversal $\vec{E}_t$ :
 \begin{equation}
-\vec{E}_t(r,\phi,0) = \begin{cases} 
-\vec{E}_t^{(1)}(r,\phi,0) & \text{sur la surface d'ouverture } S_1 (r \le a) \\
+\vec{E}_t(r,\theta,0) = \begin{cases} 
+\vec{E}_t^{(1)}(r,\theta,0) & \text{sur la surface d'ouverture } S_1 (r \le a) \\
 0 & \text{sur la paroi métallique } S_2 \setminus S_1 (a < r \le b)
 \end{cases}
 \end{equation}
 
 2. Continuité du champ magnétique transversal $\vec{H}_t$ sur l'ouverture $S_1$ :
 \begin{equation}
-\vec{H}_t^{(1)}(r,\phi,0) = \vec{H}_t^{(2)}(r,\phi,0) \quad \text{pour } r \le a
+\vec{H}_t^{(1)}(r,\theta,0) = \vec{H}_t^{(2)}(r,\theta,0) \quad \text{pour } r \le a
 \end{equation}
 
 \section{Formulation matricielle et intégrales de recouvrement}
@@ -223,7 +223,7 @@ Soit sous forme vectorielle/matricielle :
 \end{equation}
 où $\mathbf{L}$ est la matrice d'intercouplage modale de dimensions $M \times N$, dont les éléments sont définis par les intégrales de recouvrement sur la surface commune $S_1$ :
 \begin{equation}
-L_{mn} = \iint_{S_1} \vec{e}_m^{(1)}(r,\phi) \cdot \vec{e}_n^{(2)}(r,\phi) \, r \, dr \, d\phi
+L_{mn} = \iint_{S_1} \vec{e}_m^{(1)}(r,\theta) \cdot \vec{e}_n^{(2)}(r,\theta) \, r \, dr \, d\theta
 \end{equation}
 
 De même, en projetant la continuité du champ magnétique $\vec{H}_t$ sur les modes du guide 1 ($\vec{e}_m^{(1)}$) sur la surface $S_1$ :
