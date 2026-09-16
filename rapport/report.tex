@@ -44,7 +44,7 @@ en considérant un courant nul: $\vec{j}=0$ et une densité de charges nulle: $\
 Les équation deviennent:
 
 \begin{align}
-\vec{\nabla} \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
+\vec{\nabla} \cdot \vec{E} &= 0 \\
 \vec{\nabla} \cdot \vec{H} &= 0 \\
 \vec{\nabla} \times \vec{E} &= -i \omega \mu \vec{H} \\
 \vec{\nabla} \times \vec{H} &= i \omega \varepsilon \vec{E}
@@ -239,21 +239,67 @@ Ce qui donne, sous forme matricielle:
 où $\mathbf{Y}^{(1)}$ et $\mathbf{Y}^{(2)}$ sont les matrices diagonales d'admittances modales.
 
 \section{Résolution de la matrice de répartition (Matrice S)}
-En substituant \eqref{eq:modal_E} dans \eqref{eq:modal_H}, on élimine le vecteur $\mathbf{C}$ :
+
+On cherche a calculer la matrice S au niveau de la discontinuité:
+
 \begin{equation}
-\mathbf{Y}^{(1)} (\mathbf{A} - \mathbf{B}) = \mathbf{L} \mathbf{Y}^{(2)} \mathbf{L}^T (\mathbf{A} + \mathbf{B})
+\begin{bmatrix} \mathbf{a}^- \\ \mathbf{b}^+ \end{bmatrix} = \begin{bmatrix} \mathbf{S}_{11} & \mathbf{S}_{12} \\ \mathbf{S}_{21} & \mathbf{S}_{22} \end{bmatrix} \begin{bmatrix} \mathbf{a}^+ \\ \mathbf{b}^- \end{bmatrix}
 \end{equation}
 
-En posant la matrice d'admittance équivalente admise à l'interface $\mathbf{Y}_{in} = \mathbf{L} \mathbf{Y}^{(2)} \mathbf{L}^T$, on obtient la relation reliant les amplitudes réfléchies $\mathbf{B}$ aux amplitudes incidentes $\mathbf{A}$ :
+On isole le terme $\mathbf{b^+}$ dans l'équation \eqref{eq:modal_E}:
+
 \begin{equation}
-\mathbf{B} = \left[ \mathbf{Y}^{(1)} + \mathbf{Y}_{in} \right]^{-1} \left[ \mathbf{Y}^{(1)} - \mathbf{Y}_{in} \right] \mathbf{A} = \mathbf{S}_{11} \mathbf{A}
+\label{eq:expr_b+}
+\mathbf{b}^+ = \mathbf{M}^T \mathbf{a}^+ + \mathbf{M}^T \mathbf{a}^- - \mathbf{b}^-
 \end{equation}
 
-Les coefficients de transmission vers le guide 2 s'obtiennent ensuite directement par :
+Et on le ré-injecte dans l'équation \eqref{eq:modal_H}:
+
 \begin{equation}
-\mathbf{C} = \mathbf{L}^T (\mathbf{I} + \mathbf{S}_{11}) \mathbf{A} = \mathbf{S}_{21} \mathbf{A}
+\mathbf{Y}^{(1)} (\mathbf{a}^+ - \mathbf{a}^-) = \mathbf{M} \mathbf{Y}^{(2)} \left( [\mathbf{M}^T \mathbf{a}^+ + \mathbf{M}^T \mathbf{a}^- - \mathbf{b}^-] - \mathbf{b}^- \right)
 \end{equation}
 
-Ce système permet de déterminer intégralement les champs électromagnétiques complexes réels de part et d'autre de la jonction en tenant compte de la conversion de modes et des modes évinescents générés à l'interface.
+qui donne après simplification:
+
+\begin{equation}
+\mathbf{Y}^{(1)} \mathbf{a}^+ - \mathbf{Y}^{(1)} \mathbf{a}^- = \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T \mathbf{a}^+ + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T \mathbf{a}^- - 2 \mathbf{M} \mathbf{Y}^{(2)} \mathbf{b}^-
+\end{equation}
+
+En regroupant les termes en $\mathbf{a}^-$ à gauche et les termes en $\mathbf{a}^+$ et $\mathbf{b}^-$ à droite :
+
+\begin{equation}
+(\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T) \mathbf{a}^- = (\mathbf{Y}^{(1)} - \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T) \mathbf{a}^+ + 2 \mathbf{M} \mathbf{Y}^{(2)} \mathbf{b}^-
+\end{equation}
+
+En posant $\mathbf{A} = \mathbf{Y}_1 + \mathbf{M} \mathbf{Y}_2 \mathbf{M}^T$:
+
+\begin{equation}
+\mathbf{a}^- = \mathbf{A}^{-1} (\mathbf{Y}^{(1)} - \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T) \mathbf{a}^+ + 2 \mathbf{A}^{-1} \mathbf{M} \mathbf{Y}^{(2)} \mathbf{b}^-
+\end{equation}
+
+ce qui permet de déterminer les expressions des blocs $\mathbf{S}_{11}$ et $\mathbf{S}_{12}$:
+
+\begin{align}
+\mathbf{S}_{11} = (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} (\mathbf{Y}^{(1)} - \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T) \\
+\mathbf{S}_{12} = 2 (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{M} \mathbf{Y}^{(2)}
+\end{align}
+
+On réinjecte maintenant l'expression obtenue pour $\mathbf{a}^-$ dans l'équation \eqref{eq:expr_b+}:
+
+\begin{equation}
+\mathbf{b}^+ = \mathbf{M}^T \mathbf{a}^+ + \mathbf{M}^T (\mathbf{S}_{11} \mathbf{a}^+ + \mathbf{S}_{12} \mathbf{b}^-) - \mathbf{b}^-
+\end{equation}
+
+après simplification:
+\begin{equation}
+\mathbf{b}^+ = \mathbf{M}^T (\mathbf{I}_N + \mathbf{S}_{11}) \mathbf{a}^+ + (\mathbf{M}^T \mathbf{S}_{12} - \mathbf{I}_M) \mathbf{b}^-
+\end{equation}
+
+qui donne les expressions de $\mathbf{S}_{21}$ et $\mathbf{S}_{22}$:
+
+\begin{align}
+\mathbf{S}_{21} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{Y}^{(1)} \\
+\mathbf{S}_{22} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{M} \mathbf{Y}^{(2)} - \mathbf{I}_M
+\end{align}
 
 \end{document}
