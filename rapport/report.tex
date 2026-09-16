@@ -192,9 +192,9 @@ Au niveau de la discontinuité $z = 0$, les équations aux limites s'écrivent :
 
 1. Continuité du champ électrique transversal $\vec{E}_t$ :
 \begin{equation}
-\vec{E}_t(r,\theta,0) = \begin{cases} 
-\vec{E}_t^{(1)}(r,\theta,0) & \text{sur la surface d'ouverture } S_1 (r \le a) \\
-0 & \text{sur la paroi métallique } S_2 \setminus S_1 (a < r \le b)
+\begin{cases} 
+\vec{E}_t^{(1)}(r,\theta,0) = \vec{E}_t^{(2)}(r,\theta,0) & \text{sur la surface d'ouverture } S_1 (r \le a) \\
+\vec{E}_t^{(2)}(r,\theta,0) = 0 & \text{sur la paroi métallique } S_2 \setminus S_1 (a < r \le b)
 \end{cases}
 \end{equation}
 
@@ -205,28 +205,35 @@ Au niveau de la discontinuité $z = 0$, les équations aux limites s'écrivent :
 
 \section{Formulation matricielle et intégrales de recouvrement}
 En appliquant les propriétés d'orthogonalité des modes propres :
-\begin{equation}
-\iint_{S} \vec{e}_i \cdot \vec{e}_j \, dS = \delta_{ij}
-\end{equation}
+\begin{align}
+\iint_{S} \vec{e}_i \cdot \vec{e}_j \, dS = \delta_{ij} \\
+\iint_{S} \vec{h}_i \cdot \vec{h}_j \, dS = \delta_{ij}
+\end{align}
 
-On projette la continuité de $\vec{E}_t$ sur les modes du guide 2 ($\vec{e}_n^{(2)}$) sur la surface $S_2$ :
+On projette la continuité de $\vec{E}_t$ sur les modes du guide 2 ($\vec{e}_n^{(2)}$) sur la surface $S_1$ :
 \begin{equation}
-c_n = \sum_{m=1}^{M} (a_m + b_m) \iint_{S_1} \vec{e}_m^{(1)} \cdot \vec{e}_n^{(2)} \, dS
+\sum_{j=1}^{M} \left( {a_j}^{+} + {a_j}^{-} \right) \iint_{S_1} \vec{e}_j^{(1)} \cdot \vec{e}_n^{(2)} \, dS = {b_n}^{+} + {b_n}^{-}
 \end{equation}
 
 Soit sous forme vectorielle/matricielle :
 \begin{equation}
-\mathbf{C} = \mathbf{L}^T (\mathbf{A} + \mathbf{B})
+\mathbf{M}^T (\mathbf{a^+} + \mathbf{a^-}) = \mathbf{b^+} + \mathbf{b^-} 
 \label{eq:modal_E}
 \end{equation}
-où $\mathbf{L}$ est la matrice d'intercouplage modale de dimensions $M \times N$, dont les éléments sont définis par les intégrales de recouvrement sur la surface commune $S_1$ :
+où $\mathbf{M}$ est la matrice d'intercouplage modale de dimensions $M \times N$, dont les éléments sont définis par les intégrales de recouvrement sur la surface commune $S_1$ :
 \begin{equation}
-L_{mn} = \iint_{S_1} \vec{e}_m^{(1)}(r,\theta) \cdot \vec{e}_n^{(2)}(r,\theta) \, r \, dr \, d\theta
+M_{mn} = \iint_{S_1} \vec{e}_m^{(1)}(r,\theta) \cdot \vec{e}_n^{(2)}(r,\theta) \, r \, dr \, d\theta
 \end{equation}
 
-De même, en projetant la continuité du champ magnétique $\vec{H}_t$ sur les modes du guide 1 ($\vec{e}_m^{(1)}$) sur la surface $S_1$ :
+De même, en projetant la continuité du champ magnétique $\vec{H}_t$ sur les modes du guide 1 ($\vec{h}_m^{(1)}$) sur la surface $S_1$ :
 \begin{equation}
-\mathbf{Y}^{(1)} (\mathbf{A} - \mathbf{B}) = \mathbf{L} \mathbf{Y}^{(2)} \mathbf{C}
+Y_m^{(1)} \left( {a_m}^{+} - {a_m}^{-}\right) = \sum_{k=1}^{N} Y_k^{(2)} \left( {b_k}^{+} - {b_k}^{-} \right) \iint_{S_1} \vec{h}_m^{(1)} \cdot \vec{h}_k^{(2)} \, dS
+\end{equation}
+
+Ce qui donne, sous forme matricielle:
+
+\begin{equation}
+\mathbf{Y}^{(1)} (\mathbf{a^+} - \mathbf{a^-}) = \mathbf{M} \mathbf{Y}^{(2)} (\mathbf{b^+} - \mathbf{b^-})
 \label{eq:modal_H}
 \end{equation}
 où $\mathbf{Y}^{(1)}$ et $\mathbf{Y}^{(2)}$ sont les matrices diagonales d'admittances modales.
