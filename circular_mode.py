@@ -76,16 +76,17 @@ class CircularMode:
             fphi = (m / r) * sp.jv(m, u) if r > 1e-12 else (0.5 * self.kc if m == 1 else 0.0)
         return fr, fphi
 
-    def field_rtz(self, r, theta, z, e0=1.):
+    def field_rtz(self, r, theta, z, e0=1., dir_z=1.):
         u = self.kc * r
-        cos_n_theta_exp_beta_z = e0 * np.cos(self.m * theta) * np.exp(-1j * self.beta * z)
-        sin_n_theta_exp_beta_z = e0 * np.sin(self.m * theta) * np.exp(-1j * self.beta * z)
+        beta = self.beta * dir_z
+        cos_n_theta_exp_beta_z = e0 * np.cos(self.m * theta) * np.exp(-1j * beta * z)
+        sin_n_theta_exp_beta_z = e0 * np.sin(self.m * theta) * np.exp(-1j * beta * z)
         jv_m_u = sp.jv(self.m, u)
         jvp_m_u = sp.jvp(self.m, u)
         if self.type == 'TM':
             e_z = jv_m_u * cos_n_theta_exp_beta_z
-            e_r = -1j * self.beta / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
-            e_theta = 1j * self.beta * self.m / (self.kc ** 2 * r) * jv_m_u * sin_n_theta_exp_beta_z
+            e_r = -1j * beta / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            e_theta = 1j * beta * self.m / (self.kc ** 2 * r) * jv_m_u * sin_n_theta_exp_beta_z
             h_r = -1j * self.omega * eps0 * self.m / (self.kc ** 2 * r) * jv_m_u * sin_n_theta_exp_beta_z
             h_theta = -1j * self.omega * eps0 / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
             h_z = np.zeros_like(h_r)
@@ -94,10 +95,35 @@ class CircularMode:
             e_theta = 1j * self.omega * mu0 / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
             e_z = np.zeros_like(e_r)
             h_z = jv_m_u * cos_n_theta_exp_beta_z
-            h_r = -1j * self.beta / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
-            h_theta = 1j * self.beta * self.m / (self.kc ** 2 * r) * jv_m_u * sin_n_theta_exp_beta_z
+            h_r = -1j * beta / self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            h_theta = 1j * beta * self.m / (self.kc ** 2 * r) * jv_m_u * sin_n_theta_exp_beta_z
         return np.array([e_r, e_theta, e_z]).T, np.array([h_r, h_theta, h_z]).T
     
+
+    def field_rtz_2(self, r, theta, z, e0=1., dir_z=1.):
+        u = self.kc * r
+        beta = self.beta * dir_z
+        cos_n_theta_exp_beta_z = e0 * np.cos(self.m * theta) * np.exp(-1j * beta * z)
+        sin_n_theta_exp_beta_z = e0 * np.sin(self.m * theta) * np.exp(-1j * beta * z)
+        jv_m_u = sp.jv(self.m, u)
+        jvp_m_u = sp.jvp(self.m, u)
+        if self.type == 'TM':
+            e_z = jv_m_u * cos_n_theta_exp_beta_z
+            e_r = -self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            e_theta = (self.m / r) * jv_m_u * sin_n_theta_exp_beta_z
+            h_r = -dir_z * self.Y *(self.m / r) * jv_m_u * sin_n_theta_exp_beta_z
+            h_theta = -dir_z * self.Y * self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            h_z = np.zeros_like(h_r)
+        else:
+            e_r = (self.m / r) * jv_m_u * sin_n_theta_exp_beta_z
+            e_theta = self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            e_z = np.zeros_like(e_r)
+            h_z = self.Y * jv_m_u * cos_n_theta_exp_beta_z
+            h_r = -dir_z * self.Y * self.kc * jvp_m_u * cos_n_theta_exp_beta_z
+            h_theta = dir_z * self.Y *(self.m / r) * jv_m_u * sin_n_theta_exp_beta_z
+        return np.array([e_r, e_theta, e_z]).T, np.array([h_r, h_theta, h_z]).T
+
+
     def field_xyz(self, r, theta, z, e0=1.):
         E_rtz, H_rtz = self.field_rtz(r, theta, z, e0)
         Er, Ephi = E_rtz[0], E_rtz[1]
@@ -233,13 +259,16 @@ def compute_step_gsm(modes1, modes2, M):
     M_T = M.T
     
     # Resolution des equations de continuite aux limites
-    A = M_T @ Y1 @ M + Y2
+    A = M @ Y2 @ M_T + Y1
     A_inv = np.linalg.inv(A)
     
-    S21 = 2.0 * A_inv @ (M_T @ Y1)
-    S22 = A_inv @ (Y2 - M_T @ Y1 @ M)
-    S11 = M @ S21 - np.eye(N1)
-    S12 = M @ (S22 + np.eye(N2))
+    S11 = A_inv @ (Y1 - M @ Y2 @ M_T)
+    S12 = 2.0 * A_inv @ (M @ Y2)
+    S21 = M_T @ (S11 + np.eye(N1))
+    S22 = M_T @ S12 - np.eye(N2)
+    #S21 = 2.0 * M_T @ (A_inv @ Y1)
+    #S22 = 2.0 * M_T @ (A_inv @ (M @ Y2)) - np.eye(N2)
+
     
     # Matrice S globale (N1+N2 x N1+N2)
     S = np.block([[S11, S12],
