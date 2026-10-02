@@ -89,7 +89,7 @@ class CircularMode:
     
     def field_z(self, z, dir_z):
         beta = self.beta * dir_z
-        exp_beta_z = np.exp(1j * beta * z)
+        exp_beta_z = np.exp(-1j * beta * z)
         if self.type == "TE":
             coeff_e_t = 1j * mu0 * self.omega / self.kc **2
             coeff_h_t = 1j * beta / self.kc ** 2
