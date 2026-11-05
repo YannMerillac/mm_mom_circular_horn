@@ -5,6 +5,7 @@
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{geometry}
 \usepackage{physics}
+\usepackage{graphicx}
 
 \geometry{hmargin=2.5cm,vmargin=3cm}
 
@@ -162,6 +163,13 @@ avec Y l'admittance du mode: $\frac{\beta}{\mu \omega}$ pour un mode TE, $\frac{
 \chapter{Calcul des champs à l'interface entre deux guides d'onde circulaires de rayons différents}
 % ==========================================================
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.75]{guide_interface.png}
+    \caption{Décomposition en champs incidents et réflechis à l'interface}
+    \label{fig:guide_interface}
+\end{figure}
+
 \section{Description géométrique du problème}
 On considère la jonction à l'origine $z = 0$ entre deux guides d'onde circulaires alignés sur le même axe :
 \begin{itemize}
@@ -240,6 +248,13 @@ où $\mathbf{Y}^{(1)}$ et $\mathbf{Y}^{(2)}$ sont les matrices diagonales d'admi
 
 \section{Résolution de la matrice de répartition (Matrice S)}
 
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{matrix_s.png}
+    \caption{Modélisation de la matrice S au niveau de l'interface}
+    \label{fig:matrice_s}
+\end{figure}
+
 On cherche a calculer la matrice S au niveau de la discontinuité:
 
 \begin{equation}
@@ -301,5 +316,37 @@ qui donne les expressions de $\mathbf{S}_{21}$ et $\mathbf{S}_{22}$:
 \mathbf{S}_{21} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{Y}^{(1)} \\
 \mathbf{S}_{22} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{M} \mathbf{Y}^{(2)} - \mathbf{I}_M
 \end{align}
+
+% ==========================================================
+\chapter{Calcul de la matrice S globale pour une succession de discontinuités}
+% ==========================================================
+
+On cherche maintenat à calculer la matrice S globale d'un enchainement de 2 discontinuités:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[scale=0.75]{interface_cascading.png}
+    \caption{Champs incidents et réflechis dans un enchainement de deux discontinuités}
+    \label{fig:interface_cascading}
+\end{figure}
+
+Le champs incidents et réfléchis dans chaque tronçon sont déduis des matrices S de chaque interface:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{matrix_s_cascading.png}
+    \caption{Chainage des matrices S de chaque interface}
+    \label{fig:matrice_s_cascading}
+\end{figure}
+
+En développant l'expression des champs incidents et réflechis à chaque discontinuité:
+
+\begin{equation}
+\begin{bmatrix} \mathbf{a}^- \\ \mathbf{b}^+ \end{bmatrix} = \begin{bmatrix} \mathbf{A}_{11} & \mathbf{A}_{12} \\ \mathbf{A}_{21} & \mathbf{A}_{22} \end{bmatrix} \begin{bmatrix} \mathbf{a}^+ \\ \mathbf{b}^- \end{bmatrix}
+\end{equation}
+
+\begin{equation}
+\begin{bmatrix} \mathbf{b}^- \\ \mathbf{c}^+ \end{bmatrix} = \begin{bmatrix} \mathbf{B}_{11} & \mathbf{B}_{12} \\ \mathbf{B}_{21} & \mathbf{B}_{22} \end{bmatrix} \begin{bmatrix} \mathbf{b}^+ \\ \mathbf{c}^- \end{bmatrix}
+\end{equation}
 
 \end{document}
