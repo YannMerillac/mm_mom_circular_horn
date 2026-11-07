@@ -349,4 +349,50 @@ En développant l'expression des champs incidents et réflechis à chaque discon
 \begin{bmatrix} \mathbf{b}^- \\ \mathbf{c}^+ \end{bmatrix} = \begin{bmatrix} \mathbf{B}_{11} & \mathbf{B}_{12} \\ \mathbf{B}_{21} & \mathbf{B}_{22} \end{bmatrix} \begin{bmatrix} \mathbf{b}^+ \\ \mathbf{c}^- \end{bmatrix}
 \end{equation}
 
+Si on développe chaque produit matriciel:
+
+\begin{align}
+    \mathbf{a}^- = \mathbf{A}_{11} \mathbf{a}^+ + \mathbf{A}_{12} \mathbf{b}^- \label{cascade_a_minus} \\
+    \mathbf{b}^+ = \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22} \mathbf{b}^- \label{cascade_b_plus} \\
+    \mathbf{b}^- = \mathbf{B}_{11} \mathbf{b}^+ + \mathbf{B}_{12} \mathbf{c}^- \label{cascade_b_minus}\\
+    \mathbf{c}^+ = \mathbf{B}_{21} \mathbf{b}^+ + \mathbf{B}_{22} \mathbf{c}^- \label{cascade_c_plus} 
+\end{align}
+
+En substituant \ref{cascade_b_minus} dans \ref{cascade_b_plus}:
+
+\begin{equation}
+    \mathbf{b}^+ = \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22} (\mathbf{B}_{11} \mathbf{b}^+ + \mathbf{B}_{12} \mathbf{c}^- )
+\end{equation}
+
+Et en rassemblant les termes $\mathbf{b}^+$:
+
+\begin{equation}
+    (\mathbf{I} - \mathbf{A}_{22}\mathbf{B}_{11})\mathbf{b}^+ = \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22}\mathbf{B}_{12} \mathbf{c}^-
+\end{equation}
+
+finalement:
+
+\begin{equation}
+    \mathbf{b}^+ = (\mathbf{I} - \mathbf{A}_{22}\mathbf{B}_{11})^{-1} (\mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22}\mathbf{B}_{12} \mathbf{c}^-)
+\end{equation}
+
+En substituant cette expression dans \ref{cascade_c_plus}
+
+\begin{equation}
+    \mathbf{c}^+ = \mathbf{B}_{21} (\mathbf{I} - \mathbf{A}_{22}\mathbf{B}_{11})^{-1} \mathbf{A}_{21} \mathbf{a}^+ + (\mathbf{B}_{22} + \mathbf{B}_{21} (\mathbf{I} - \mathbf{A}_{22}\mathbf{B}_{11})^{-1} \mathbf{A}_{22} \mathbf{B}_{12}) \mathbf{c}^-
+\end{equation}
+
+Maintenant en substituant \ref{cascade_b_plus} dans \ref{cascade_b_minus}:
+
+\begin{equation}
+    \mathbf{b}^- = (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} (\mathbf{B}_{11} \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{B}_{12}\mathbf{c}^-)
+\end{equation}
+
+Et en ré-injectant dans \ref{cascade_a_minus}:
+
+\begin{equation}
+    \mathbf{a}^- = (\mathbf{A}_{11} + (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{11} \mathbf{A}_{21}) \mathbf{a}^+ + \mathbf{A}_{12} (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{12} \mathbf{c}^-
+\end{equation}
+
+
 \end{document}
