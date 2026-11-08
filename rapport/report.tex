@@ -321,6 +321,7 @@ qui donne les expressions de $\mathbf{S}_{21}$ et $\mathbf{S}_{22}$:
 \chapter{Calcul de la matrice S globale pour une succession de discontinuités}
 % ==========================================================
 
+
 On cherche maintenat à calculer la matrice S globale d'un enchainement de 2 discontinuités:
 
 \begin{figure}[htbp]
@@ -329,6 +330,8 @@ On cherche maintenat à calculer la matrice S globale d'un enchainement de 2 dis
     \caption{Champs incidents et réflechis dans un enchainement de deux discontinuités}
     \label{fig:interface_cascading}
 \end{figure}
+
+\section{Calcul de la matrice S équivalente: Redheffer star product}
 
 Le champs incidents et réfléchis dans chaque tronçon sont déduis des matrices S de chaque interface:
 
@@ -391,8 +394,24 @@ Maintenant en substituant \ref{cascade_b_plus} dans \ref{cascade_b_minus}:
 Et en ré-injectant dans \ref{cascade_a_minus}:
 
 \begin{equation}
-    \mathbf{a}^- = (\mathbf{A}_{11} + (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{11} \mathbf{A}_{21}) \mathbf{a}^+ + \mathbf{A}_{12} (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{12} \mathbf{c}^-
+    \mathbf{a}^- = (\mathbf{A}_{11} + \mathbf{A}_{12}(\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{11} \mathbf{A}_{21}) \mathbf{a}^+ + \mathbf{A}_{12} (\mathbf{I} - \mathbf{B}_{11}\mathbf{A}_{22})^{-1} \mathbf{B}_{12} \mathbf{c}^-
 \end{equation}
+
+Finalement on obtient la formule du produit en cascade des deux discontinuités:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{matrix_s_star_prod.png}
+    \caption{Matrice S équivalente}
+    \label{fig:matrice_s_star_prod}
+\end{figure}
+
+
+\[
+A \star B = \begin{pmatrix} A_{11} + A_{12}(I - B_{11}A_{22})^{-1}B_{11}A_{21} & A_{12}(I - B_{11}A_{22})^{-1}B_{12} \\ B_{21}(I - A_{22}B_{11})^{-1}A_{21} & B_{22} + B_{21}(I - A_{22}B_{11})^{-1}A_{22}B_{12} \end{pmatrix}
+\]
+
+\section{Prise en compte de la propagation dans les sections droites de guide}
 
 
 \end{document}
