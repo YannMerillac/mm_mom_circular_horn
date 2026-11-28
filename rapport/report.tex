@@ -439,7 +439,7 @@ En reprenant le developpement des produits matriciels aux interfaces A et B:
 \begin{align}
     \mathbf{a}^- = \mathbf{A}_{11} \mathbf{a}^+ + \mathbf{A}_{12} \mathbf{b}^- \\
     \mathbf{b}^+ = \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22} \mathbf{b}^- \\
-    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \mathbf{b}^+ + \mathbf{B}_{12} \mathbf{c}^- \\
+    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \widetilde{\mathbf{b}^+} + \mathbf{B}_{12} \mathbf{c}^- \\
     \mathbf{c}^+ = \mathbf{B}_{21} \widetilde{\mathbf{b}^+} + \mathbf{B}_{22} \mathbf{c}^- 
 \end{align}
 
@@ -448,7 +448,7 @@ En ré-injectant les expressions \ref{b_plus_tilde} et \ref{b_minus_tilde}:
 \begin{align}
     \mathbf{a}^- = \mathbf{A}_{11} \mathbf{a}^+ + \mathbf{A}_{12} \mathbf{W} \widetilde{\mathbf{b^-}} \\
     \mathbf{W^{-1}} \widetilde{\mathbf{b}^+} = \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{A}_{22} \mathbf{W} \widetilde{\mathbf{b^-}} \\
-    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \mathbf{b}^+ + \mathbf{B}_{12} \mathbf{c}^- \\
+    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \widetilde{\mathbf{b}^+} + \mathbf{B}_{12} \mathbf{c}^- \\
     \mathbf{c}^+ = \mathbf{B}_{21} \widetilde{\mathbf{b}^+} + \mathbf{B}_{22} \mathbf{c}^- 
 \end{align}
 
@@ -457,7 +457,7 @@ on multiplie la deuxième ligne par W:
 \begin{align}
     \mathbf{a}^- = \mathbf{A}_{11} \mathbf{a}^+ + \mathbf{A}_{12} \mathbf{W} \widetilde{\mathbf{b^-}} \\
     \widetilde{\mathbf{b}^+} = \mathbf{W} \mathbf{A}_{21} \mathbf{a}^+ + \mathbf{W} \mathbf{A}_{22} \mathbf{W} \widetilde{\mathbf{b^-}} \\
-    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \mathbf{b}^+ + \mathbf{B}_{12} \mathbf{c}^- \\
+    \widetilde{\mathbf{b}^-} = \mathbf{B}_{11} \widetilde{\mathbf{b}^+} + \mathbf{B}_{12} \mathbf{c}^- \\
     \mathbf{c}^+ = \mathbf{B}_{21} \widetilde{\mathbf{b}^+} + \mathbf{B}_{22} \mathbf{c}^- 
 \end{align}
 
