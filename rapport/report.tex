@@ -118,8 +118,13 @@ k_{c,np}^{TE} = \frac{x'_{np}}{a}
 \subsection{Récapitulatif: expression finale des composantes des modes circulaires}
 La constante de propagation guidée s'obtient pour chaque mode par :
 \begin{equation}
-\beta_{np} = \sqrt{k^2 - (k_{c,np})^2}
+\beta_{np} =
+\begin{cases}
+\sqrt{k^2 - (k_{c,np})^2}, & k \ge k_{c,np},\\[2mm]
+-i\sqrt{(k_{c,np})^2 - k^2}, & k < k_{c,np}.
+\end{cases}
 \end{equation}
+Le choix de la branche pour $k<k_{c,np}$ assure la décroissance de l'onde évanescente dans le sens $+z$.
 
 \paragraph{modes TE}
 \begin{align}
