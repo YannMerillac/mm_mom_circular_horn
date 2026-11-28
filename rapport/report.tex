@@ -62,7 +62,7 @@ En supposant une propagation selon $z$ sous la forme $e^{-i \delta_z \beta z}$, 
 \frac{\partial^2 \psi}{\partial r^2} + \frac{1}{r}\frac{\partial \psi}{\partial r} + \frac{1}{r^2}\frac{\partial^2 \psi}{\partial \theta^2} + k_c^2 \psi = 0
 \label{eq:helmholtz_cyl}
 \end{equation}
-avec $\psi \in \{E_z, H_z\}$ et où $k_c^2 = k^2 - \beta^2$ définit la constante de propagation transversale (fréquence de coupure).
+avec $\psi \in \{E_z, H_z\}$ et où $k_c^2 = k^2 - \beta^2$ définit le nombre d'onde transverse (la fréquence de coupure associée est $f_c = k_c/(2\pi\sqrt{\varepsilon\mu})$).
 
 \section{Séparation des variables et fonctions de Bessel}
 Par la méthode de séparation des variables, on pose $\psi(r, \theta) = R(r)\Phi(\theta)$. L'équation \eqref{eq:helmholtz_cyl} se décompose en deux équations différentielles ordinaires :
@@ -157,7 +157,9 @@ Dans la suite de ce rapport, on notera les champs sous la forme compacte suivant
 \vec{H_t} = \delta_z Y E_0 \vec{h}(r, \theta) e^{-i\delta_z\beta z}
 \end{align}
 
-avec Y l'admittance du mode: $\frac{\beta}{\mu \omega}$ pour un mode TE, $\frac{\epsilon \omega}{\beta}$ pour un mode TM
+où $\vec h=\hat z\times\vec e$ (soit, en composantes, $\hat z\times\vec e=-e_\theta\,\hat r+e_r\,\hat\theta$), de sorte que $\vec H_t=\delta_z Y\,\hat z\times\vec E_t$.
+
+avec $Y$ l'admittance du mode : $\frac{\beta}{\mu \omega}$ pour un mode TE, $\frac{\epsilon \omega}{\beta}$ pour un mode TM.
 
 % ==========================================================
 \chapter{Calcul des champs à l'interface entre deux guides d'onde circulaires de rayons différents}
