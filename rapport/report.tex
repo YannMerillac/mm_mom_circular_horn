@@ -228,7 +228,7 @@ Soit sous forme vectorielle/matricielle :
 \mathbf{M}^T (\mathbf{a^+} + \mathbf{a^-}) = \mathbf{b^+} + \mathbf{b^-} 
 \label{eq:modal_E}
 \end{equation}
-où $\mathbf{M}$ est la matrice d'intercouplage modale de dimensions $M \times N$, dont les éléments sont définis par les intégrales de recouvrement sur la surface commune $S_1$ :
+où $\mathbf{M}$ est la matrice d'intercouplage modale, de dimensions $M \times N$ ($M$ et $N$ désignant respectivement les nombres de modes des guides 1 et 2), dont les éléments sont définis par les intégrales de recouvrement sur la surface commune $S_1$ :
 \begin{equation}
 M_{mn} = \iint_{S_1} \vec{e}_m^{(1)}(r,\theta) \cdot \vec{e}_n^{(2)}(r,\theta) \, r \, dr \, d\theta
 \end{equation}
@@ -307,14 +307,14 @@ On réinjecte maintenant l'expression obtenue pour $\mathbf{a}^-$ dans l'équati
 
 après simplification:
 \begin{equation}
-\mathbf{b}^+ = \mathbf{M}^T (\mathbf{I}_N + \mathbf{S}_{11}) \mathbf{a}^+ + (\mathbf{M}^T \mathbf{S}_{12} - \mathbf{I}_M) \mathbf{b}^-
+\mathbf{b}^+ = \mathbf{M}^T (\mathbf{I}_M + \mathbf{S}_{11}) \mathbf{a}^+ + (\mathbf{M}^T \mathbf{S}_{12} - \mathbf{I}_N) \mathbf{b}^-
 \end{equation}
 
 qui donne les expressions de $\mathbf{S}_{21}$ et $\mathbf{S}_{22}$:
 
 \begin{align}
 \mathbf{S}_{21} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{Y}^{(1)} \\
-\mathbf{S}_{22} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{M} \mathbf{Y}^{(2)} - \mathbf{I}_M
+\mathbf{S}_{22} = 2 \mathbf{M}^T (\mathbf{Y}^{(1)} + \mathbf{M} \mathbf{Y}^{(2)} \mathbf{M}^T)^{-1} \mathbf{M} \mathbf{Y}^{(2)} - \mathbf{I}_N
 \end{align}
 
 % ==========================================================
